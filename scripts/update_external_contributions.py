@@ -4,6 +4,8 @@ Update the README activity table with real GitHub projects and contributions.
 The GitHub Actions workflow supplies GH_USERNAME and GH_TOKEN automatically.
 The script keeps the README table limited to public repositories owned by the
 profile plus PRs/issues authored by the profile in repositories they do not own.
+It also keeps the GitHub Activity dashboard anchor stable so links such as
+https://github.com/<username>#-github-activity continue to resolve correctly.
 """
 
 import os
@@ -15,6 +17,8 @@ import requests
 README_PATH = "README.md"
 START_MARKER = "<!-- EXTERNAL-CONTRIBUTIONS:START -->"
 END_MARKER = "<!-- EXTERNAL-CONTRIBUTIONS:END -->"
+DASHBOARD_ANCHOR = '<a id="-github-activity" name="-github-activity"></a>'
+DASHBOARD_HEADING = "## 📊 GitHub Activity"
 MAX_ROWS = 15
 API_URL = "https://api.github.com/search/issues"
 REPO_SEARCH_URL = "https://api.github.com/search/repositories"
@@ -165,8 +169,30 @@ def render_table(rows: list[tuple[str, str, str, str, str]]) -> str:
     return "\n".join(lines)
 
 
+def ensure_dashboard_anchor(content: str) -> str:
+    """Keep one stable anchor immediately before the GitHub Activity heading."""
+    # Remove older explicit anchors for this target to avoid duplicate IDs.
+    anchor_variants = (
+        '<a id="-github-activity"></a>',
+        '<a name="-github-activity"></a>',
+        DASHBOARD_ANCHOR,
+    )
+    for anchor in anchor_variants:
+        content = content.replace(anchor, "")
+
+    heading_count = content.count(DASHBOARD_HEADING)
+    if heading_count != 1:
+        sys.exit("README.md must contain exactly one GitHub Activity heading")
+
+    return content.replace(
+        DASHBOARD_HEADING,
+        f"{DASHBOARD_ANCHOR}\n\n{DASHBOARD_HEADING}",
+        1,
+    )
+
+
 def update_readme(table_markdown: str) -> None:
-    """Replace only the marked activity table in README.md."""
+    """Replace only the marked activity table and repair the dashboard anchor."""
     try:
         with open(README_PATH, "r", encoding="utf-8") as file:
             content = file.read()
@@ -179,6 +205,7 @@ def update_readme(table_markdown: str) -> None:
     before, remainder = content.split(START_MARKER, 1)
     _, after = remainder.split(END_MARKER, 1)
     new_content = f"{before}{START_MARKER}\n{table_markdown}\n{END_MARKER}{after}"
+    new_content = ensure_dashboard_anchor(new_content)
 
     if new_content == content:
         print("README.md is already up to date.")
