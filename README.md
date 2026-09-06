@@ -1,7 +1,7 @@
 <h1 align="center">Hi there, I'm Lblinarul 👋</h1>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=58A6FF&center=true&vCenter=true&width=520&lines=Building+things+that+ship;Always+learning%2C+always+shipping;Senior+Full-Stack+Development" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=58A6FF&center=true&vCenter=true&width=560&lines=Building+things+that+ship;Always+learning%2C+always+shipping;Senior+Full-Stack+Development" alt="Typing SVG" />
 </p>
 
 <p align="center">
@@ -13,9 +13,120 @@
 
 ---
 
+## 👨‍💻 Senior Full-Stack Developer
+
+**React · TypeScript · Python · FastAPI**
+
+I build and maintain full-stack web applications across frontend, backend, data, and delivery. My focus is on practical engineering: clear architecture, reliable APIs, maintainable code, automated testing, and production-ready development workflows.
+
+I enjoy solving problems where product requirements meet technical constraints — from responsive React interfaces and API design to database performance, debugging, CI/CD, and incremental system improvement.
+
+---
+
+## 🎯 Core Expertise
+
+**Frontend** — React, TypeScript, JavaScript, Next.js, component architecture, responsive UI
+
+**Backend** — Python, FastAPI, Django, REST APIs, authentication, authorization, asynchronous processing
+
+**Data** — PostgreSQL, SQL, Redis, database design, migrations, indexing, query optimization
+
+**Delivery / DevOps** — Docker, GitHub Actions, CI/CD, Linux, Git/GitHub workflows
+
+**Quality** — pytest, Jest, Playwright, unit testing, integration testing, end-to-end testing, code review
+
+---
+
+## 🌱 Mentoring Junior & New Programmers
+
+I answer questions and give code-level feedback to people earlier in their engineering path. I keep it practical — the goal is to help someone understand the underlying problem and become able to solve the next one independently.
+
+**How I help:**
+
+- Explain why something does not work, not only how to patch it
+- Review junior-written code with specific, actionable feedback
+- Walk through debugging by isolating failures before applying fixes
+- Explain architectural and implementation trade-offs
+- Point toward the next concept worth learning based on the actual problem
+
+If you're a junior developer with a question, feel free to open a [Discussion](https://github.com/lblinarul-dev/lblinarul-dev/discussions) on this repository.
+
+---
+
+## 📐 Math Mentoring for Students
+
+I tutor students in higher mathematics, with an emphasis on understanding concepts and connecting abstract ideas to practical applications in software and engineering where useful.
+
+**Areas I cover:**
+
+- Calculus (single and multivariable)
+- Linear algebra
+- Discrete mathematics
+- Probability & statistics
+- Introductory algorithm analysis / complexity
+
+**Approach:**
+
+- Work from the student's actual coursework or problem set
+- Emphasize why a method works before mechanical repetition
+- Use small code examples or visualizations when they make abstract concepts easier to understand
+
+---
+
+## 🔍 Open-Source Code Review & Issue Fixing
+
+I review other people's GitHub projects and contribute fixes, mostly working from issue trackers: reproducing a reported problem, narrowing down the root cause, and submitting or reviewing changes that fit the project's existing conventions.
+
+**What this typically looks like:**
+
+- Reproduce issues locally and confirm the actual root cause
+- Submit PRs with a clear explanation of the problem, fix, and verification
+- Review code for correctness, edge cases, and maintainability
+- Follow existing project conventions and test setups rather than imposing unnecessary changes
+
+### Recent external contributions
+
+<!-- EXTERNAL-CONTRIBUTIONS:START -->
+| Repo | Type | Description | Link |
+|---|---|---|---|
+| _(no external contributions recorded yet)_ | | | |
+<!-- EXTERNAL-CONTRIBUTIONS:END -->
+
+> This table is designed to be updated automatically from real GitHub activity on repositories I don't own.
+
+---
+
+## 🏗️ Engineering Focus
+
+- **API Architecture** — REST design, OpenAPI documentation, validation, authentication, authorization, and clear service boundaries
+- **Performance** — profiling, database query optimization, indexing, caching, and efficient data access
+- **Testing** — pytest, Jest, Playwright; unit, integration, and end-to-end testing
+- **Security** — input validation, authentication/session handling, dependency hygiene, and secure API boundaries
+- **Maintainability** — TypeScript/Python typing, modular architecture, readable interfaces, documentation, and incremental refactoring
+- **Delivery** — reproducible development environments, CI checks, automated testing, and deployment workflows
+- **Debugging** — isolate reproducible failures, inspect system behavior, identify root causes, and make targeted fixes
+
+---
+
+## 🛠️ Tech Stack
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=js,ts,react,nodejs,python,git,github,vscode" alt="JavaScript, TypeScript, React, Node.js, Python, Git, GitHub and VS Code" />
+</p>
+
+**Primary**
+
+`React` `TypeScript` `Python` `FastAPI` `PostgreSQL` `REST APIs` `Docker` `CI/CD`
+
+**Supporting**
+
+`Next.js` `Django` `Redis` `GitHub Actions` `Playwright` `pytest` `Jest` `SQLAlchemy`
+
+---
+
 ## 📊 GitHub Activity
 
-> These cards are live GitHub-derived images, not manually entered statistics. They may be cached by the services that generate them.
+> These cards are live GitHub-derived images and may be cached by the services that generate them.
 
 <table align="center">
   <tr>
@@ -38,52 +149,24 @@
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=lblinarul-dev&days=90&theme=tokyo-night&hide_border=true&bg_color=00000000&custom_title=Contribution%20Activity%20%28Last%2090%20Days%29" alt="GitHub activity graph for the last 90 days" />
 </p>
 
-> The activity graph supports a 1–90 day window. It reflects GitHub activity that the service can see; it should not be treated as a manually maintained work log.
+---
 
-### 🔎 Verified current activity
+## 🔧 Development Approach
 
-As of September 6, 2026, this profile repository contains two public commits: the initial profile README and its subsequent profile update. There is not enough verified public repository activity yet to honestly present a fabricated 2–3 month project history.
+- Start with the simplest architecture that satisfies the real requirements.
+- Keep frontend, backend, and data responsibilities clear.
+- Prefer explicit API contracts and predictable failure handling.
+- Test business-critical behavior and regression-prone areas.
+- Measure before optimizing performance.
+- Automate repetitive quality and delivery checks.
+- Refactor incrementally instead of introducing unnecessary complexity.
+- Treat security, accessibility, reliability, and maintainability as part of normal development.
+- Document important technical decisions so systems remain understandable as they evolve.
 
 ---
 
-## 🛠️ Tech Stack
+## 📫 Contact
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=js,ts,react,nodejs,python,git,github,vscode" alt="JavaScript, TypeScript, React, Node.js, Python, Git, GitHub and VS Code" />
-</p>
+[LinkedIn](https://linkedin.com/in/YOUR_HANDLE) · [Email](mailto:you@example.com)
 
-### Core engineering areas
-
-- **Frontend:** React, TypeScript, JavaScript, Next.js, component architecture, responsive UI
-- **Backend:** Python, FastAPI, Django, REST APIs, authentication, asynchronous/background processing
-- **Data:** PostgreSQL, SQL, Redis, schema design, migrations, indexing, query optimization
-- **Engineering:** API design, testing, debugging, code review, maintainability, performance, security
-- **Delivery:** Git/GitHub, Docker, CI/CD, GitHub Actions, Linux, cloud deployment
-- **Testing:** pytest, Jest, Playwright, unit/integration/end-to-end testing
-
-## 🧩 Real-World Engineering Practice
-
-The profile should describe practical engineering work without inventing employers, clients, projects, metrics, certifications, or achievements.
-
-Examples of production-oriented practice represented here:
-
-- Separate frontend, backend, and data responsibilities so changes remain easier to test and maintain.
-- Design APIs around clear contracts, validation, authentication/authorization, error handling, and documentation.
-- Use database constraints, indexes, migrations, and query inspection when working with real application data.
-- Add automated tests around business-critical behavior and regression-prone code.
-- Use CI checks before merging so formatting, tests, and builds are repeatable.
-- Use Docker when reproducible local or deployment environments solve a real project problem.
-- Investigate failures from logs, traces, requests, database behavior, and reproducible test cases instead of guessing.
-- Prefer incremental refactoring driven by actual requirements and technical constraints.
-
-## ⚠️ Activity Integrity
-
-GitHub activity is intentionally shown from real GitHub data. No artificial commits, backdated activity, fictional case studies, invented metrics, or fabricated project history are added to make the profile look more active.
-
-When real project activity accumulates, this dashboard will reflect it automatically.
-
-<!--
-Do not add fictional case studies or claims.
-Do not invent employers, clients, projects, metrics, certifications, years of experience, achievements, or contribution history.
-Do not mention ChatGPT, AI-generated content, prompts, or this conversation in the public profile.
--->
+Junior developers with questions, or maintainers who want a hand triaging issues, can open a [Discussion](https://github.com/lblinarul-dev/lblinarul-dev/discussions).
