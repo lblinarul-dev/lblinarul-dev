@@ -1,13 +1,12 @@
 """
-Fetches this user's merged PRs and opened issues on repositories they do NOT own,
-and rewrites the table between the EXTERNAL-CONTRIBUTIONS markers in README.md.
+Update the README table with real external GitHub contributions.
 
-Run by .github/workflows/external-contributions.yml on a schedule, or manually:
-    GH_USERNAME=your-username GH_TOKEN=ghp_xxx python scripts/update_external_contributions.py
+The GitHub Actions workflow supplies GH_USERNAME and GH_TOKEN automatically.
 """
 
 import os
 import sys
+from typing import Any
 
 import requests
 
@@ -15,9 +14,10 @@ README_PATH = "README.md"
 START_MARKER = "<!-- EXTERNAL-CONTRIBUTIONS:START -->"
 END_MARKER = "<!-- EXTERNAL-CONTRIBUTIONS:END -->"
 MAX_ROWS = 15
+API_URL = "https://api.github.com/search/issues"
 
-USERNAME = os.environ.get("GH_USERNAME")
-TOKEN = os.environ.get("GH_TOKEN")
+USERNAME = os.environ.get("GH_USERNAME", "").strip()
+TOKEN = os.environ.get("GH_TOKEN", "").strip()
 
 if not USERNAME:
     sys.exit("GH_USERNAME environment variable is required")
@@ -26,53 +26,61 @@ HEADERS = {
     "Accept": "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
 }
-
 if TOKEN:
     HEADERS["Authorization"] = f"Bearer {TOKEN}"
 
 
-def search_issues(query: str) -> list[dict]:
-    """Calls the GitHub Search API and returns the items list."""
-    url = "https://api.github.com/search/issues"
-    resp = requests.get(
-        url,
-        headers=HEADERS,
-        params={"q": query, "per_page": MAX_ROWS, "sort": "updated"},
-        timeout=30,
-    )
-    resp.raise_for_status()
-    return resp.json().get("items", [])
+def search_issues(query: str) -> list[dict[str, Any]]:
+    """Search GitHub issues/PRs with clear errors and a bounded timeout."""
+    try:
+        response = requests.get(
+            API_URL,
+            headers=HEADERS,
+            params={"q": query, "per_page": MAX_ROWS, "sort": "updated", "order": "desc"},
+            timeout=30,
+        )
+        response.raise_for_status()
+        data = response.json()
+    except requests.RequestException as exc:
+        sys.exit(f"GitHub API request failed: {exc}")
+
+    items = data.get("items", [])
+    if not isinstance(items, list):
+        sys.exit("GitHub API returned an unexpected response")
+    return items
 
 
 def build_rows() -> list[tuple[str, str, str, str]]:
-    """
-    Returns rows of (repo, type, description, link) for:
-      - merged PRs authored by USERNAME, excluding repos owned by USERNAME
-      - issues authored by USERNAME, excluding repos owned by USERNAME
-    """
+    """Return merged external PRs and opened external issues, newest first."""
     rows: list[tuple[str, str, str, str]] = []
 
     merged_prs = search_issues(f"author:{USERNAME} type:pr is:merged -user:{USERNAME}")
     for item in merged_prs:
-        repo_full_name = "/".join(item["repository_url"].split("/")[-2:])
+        repo_url = item.get("repository_url", "")
+        repo_full_name = "/".join(repo_url.rstrip("/").split("/")[-2:])
+        if not repo_full_name or repo_full_name == "/":
+            continue
         rows.append(
             (
                 repo_full_name,
-                "Bug fix / PR",
-                item["title"],
-                f"[#{item['number']}]({item['html_url']})",
+                "Merged PR",
+                item.get("title", "Untitled PR"),
+                f"[#{item.get('number')}]({item.get('html_url', '')})",
             )
         )
 
     opened_issues = search_issues(f"author:{USERNAME} type:issue -user:{USERNAME}")
     for item in opened_issues:
-        repo_full_name = "/".join(item["repository_url"].split("/")[-2:])
+        repo_url = item.get("repository_url", "")
+        repo_full_name = "/".join(repo_url.rstrip("/").split("/")[-2:])
+        if not repo_full_name or repo_full_name == "/":
+            continue
         rows.append(
             (
                 repo_full_name,
                 "Issue",
-                item["title"],
-                f"[#{item['number']}]({item['html_url']})",
+                item.get("title", "Untitled issue"),
+                f"[#{item.get('number')}]({item.get('html_url', '')})",
             )
         )
 
@@ -80,6 +88,7 @@ def build_rows() -> list[tuple[str, str, str, str]]:
 
 
 def render_table(rows: list[tuple[str, str, str, str]]) -> str:
+    """Render a safe Markdown table."""
     if not rows:
         return (
             "| Repo | Type | Description | Link |\n"
@@ -88,31 +97,43 @@ def render_table(rows: list[tuple[str, str, str, str]]) -> str:
         )
 
     lines = ["| Repo | Type | Description | Link |", "|---|---|---|---|"]
-    for repo, kind, desc, link in rows:
-        desc = desc.replace("|", "\\|")
-        lines.append(f"| {repo} | {kind} | {desc} | {link} |")
+    for repo, kind, description, link in rows:
+        repo = repo.replace("|", "\\|")
+        kind = kind.replace("|", "\\|")
+        description = description.replace("|", "\\|").replace("\n", " ")
+        lines.append(f"| {repo} | {kind} | {description} | {link} |")
     return "\n".join(lines)
 
 
 def update_readme(table_markdown: str) -> None:
-    with open(README_PATH, "r", encoding="utf-8") as f:
-        content = f.read()
+    """Replace only the marked contribution table in README.md."""
+    try:
+        with open(README_PATH, "r", encoding="utf-8") as file:
+            content = file.read()
+    except OSError as exc:
+        sys.exit(f"Could not read {README_PATH}: {exc}")
 
-    if START_MARKER not in content or END_MARKER not in content:
-        sys.exit(f"Could not find {START_MARKER} / {END_MARKER} in {README_PATH}")
+    if content.count(START_MARKER) != 1 or content.count(END_MARKER) != 1:
+        sys.exit("README.md must contain exactly one external-contributions marker pair")
 
-    before = content.split(START_MARKER)[0]
-    after = content.split(END_MARKER)[1]
+    before, remainder = content.split(START_MARKER, 1)
+    _, after = remainder.split(END_MARKER, 1)
     new_content = f"{before}{START_MARKER}\n{table_markdown}\n{END_MARKER}{after}"
 
-    with open(README_PATH, "w", encoding="utf-8") as f:
-        f.write(new_content)
+    if new_content == content:
+        print("README.md is already up to date.")
+        return
+
+    try:
+        with open(README_PATH, "w", encoding="utf-8") as file:
+            file.write(new_content)
+    except OSError as exc:
+        sys.exit(f"Could not write {README_PATH}: {exc}")
 
 
 def main() -> None:
     rows = build_rows()
-    table_markdown = render_table(rows)
-    update_readme(table_markdown)
+    update_readme(render_table(rows))
     print(f"Updated {README_PATH} with {len(rows)} external contribution(s).")
 
 
