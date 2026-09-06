@@ -124,6 +124,8 @@ I review other people's GitHub projects and contribute fixes, mostly working fro
 
 ---
 
+<a id="-github-activity" name="-github-activity"></a>
+
 ## 📊 GitHub Activity
 
 > These cards are live GitHub-derived images and may be cached by the services that generate them.
