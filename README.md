@@ -84,15 +84,15 @@ I review other people's GitHub projects and contribute fixes, mostly working fro
 - Review code for correctness, edge cases, and maintainability
 - Follow existing project conventions and test setups rather than imposing unnecessary changes
 
-### Recent external contributions
+### Recent GitHub activity
 
 <!-- EXTERNAL-CONTRIBUTIONS:START -->
 | Repo | Type | Description | Link |
 |---|---|---|---|
-| _(no external contributions recorded yet)_ | | | |
+| lblinarul-dev/react-debugger | Project | I Fixed a Production-Style React Performance Problem | [Repo](https://github.com/lblinarul-dev/react-debugger) |
 <!-- EXTERNAL-CONTRIBUTIONS:END -->
 
-> This table is designed to be updated automatically from real GitHub activity on repositories I don't own.
+> This table is updated automatically from real public GitHub projects and contribution activity.
 
 ---
 
