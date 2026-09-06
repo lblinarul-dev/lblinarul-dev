@@ -1,0 +1,39 @@
+name: Update external contributions
+
+on:
+  schedule:
+    # Runs every Monday at 06:00 UTC. Adjust as you like.
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Update external contributions table
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USERNAME: ${{ github.repository_owner }}
+        run: python scripts/update_external_contributions.py
+
+      - name: Commit changes if README changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --quiet --cached || git commit -m "chore: update external contributions table"
+          git push
