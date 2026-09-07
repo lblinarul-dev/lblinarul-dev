@@ -124,8 +124,6 @@ I review other people's GitHub projects and contribute fixes, mostly working fro
 
 ---
 
-
-
 <a id="-github-activity" name="-github-activity"></a>
 
 ## 📊 GitHub Activity
@@ -151,6 +149,16 @@ I review other people's GitHub projects and contribute fixes, mostly working fro
 
 <p align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=lblinarul-dev&days=90&theme=tokyo-night&hide_border=true&bg_color=00000000&custom_title=Contribution%20Activity%20%28Last%2090%20Days%29" alt="GitHub activity graph for the last 90 days" />
+</p>
+
+### 🐍 Contribution Activity
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake.svg">
+    <img alt="GitHub contribution snake" src="https://raw.githubusercontent.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake.svg">
+  </picture>
 </p>
 
 ---
