@@ -73,7 +73,7 @@ def search_owned_repositories() -> list[dict[str, Any]]:
     data = github_get(
         REPO_SEARCH_URL,
         {
-            "q": f"user:{USERNAME} fork:false archived:false",
+            "q": f"user:{USERNAME} is:public fork:false archived:false",
             "per_page": MAX_ROWS,
             "sort": "updated",
             "order": "desc",
