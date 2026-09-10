@@ -35,7 +35,7 @@ class UpdateExternalContributionsTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             module.ensure_dashboard_anchor(content)
 
-    def test_search_owned_repositories_filters_profile_repo(self):
+    def test_search_owned_repositories_filters_profile_repo_and_requires_public(self):
         payload = {
             "items": [
                 {"name": "lblinarul-dev", "owner": {"login": "lblinarul-dev"}},
@@ -43,9 +43,14 @@ class UpdateExternalContributionsTests(unittest.TestCase):
                 {"name": "other", "owner": {"login": "other"}},
             ]
         }
-        with patch.object(module, "github_get", return_value=payload):
+        with patch.object(module, "github_get", return_value=payload) as mocked_get:
             result = module.search_owned_repositories()
+
         self.assertEqual([repo["name"] for repo in result], ["react-debugger"])
+        query = mocked_get.call_args.args[1]["q"]
+        self.assertIn("is:public", query)
+        self.assertIn("fork:false", query)
+        self.assertIn("archived:false", query)
 
     def test_repo_name_from_issue(self):
         item = {"repository_url": "https://api.github.com/repos/example/project"}
