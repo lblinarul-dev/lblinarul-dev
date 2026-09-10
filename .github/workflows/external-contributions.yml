@@ -4,10 +4,8 @@ on:
   schedule:
     # Refresh the profile dashboard every day at 06:00 UTC.
     - cron: "0 6 * * *"
-  # Allow manual runs from the Actions tab.
-  workflow_dispatch:
+  workflow_dispatch: {}
 
-# Prevent this workflow from racing with itself while updating main.
 concurrency:
   group: profile-dashboard-update
   cancel-in-progress: false
@@ -40,34 +38,31 @@ jobs:
       - name: Refresh dashboard image cache
         run: |
           python - <<'PY'
-          from pathlib import Path
-          import re
           from datetime import datetime, timezone
+          from pathlib import Path
+          from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+          import re
 
           path = Path("README.md")
           text = path.read_text(encoding="utf-8")
           version = datetime.now(timezone.utc).strftime("%Y%m%d%H")
 
-          # Replace the previous cache-buster, or add one to dashboard image URLs.
-          text = re.sub(r"([?&])v=\d{10}", r"\1v=" + version, text)
+          pattern = re.compile(
+              r'https://(?:github-readme-stats\.vercel\.app|streak-stats\.demolab\.com|'
+              r'github-readme-activity-graph\.vercel\.app|'
+              r'raw\.githubusercontent\.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake)'
+              r'[^"\s>]*'
+          )
 
-          patterns = [
-              r"(github-readme-stats\\.vercel\\.app/[^\"\\s>]+)",
-              r"(streak-stats\\.demolab\\.com/[^\"\\s>]+)",
-              r"(github-readme-activity-graph\\.vercel\\.app/[^\"\\s>]+)",
-              r"(raw\\.githubusercontent\\.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake[^\"\\s>]+)",
-          ]
+          def add_version(match):
+              url = match.group(0)
+              parts = urlsplit(url)
+              query = [(key, value) for key, value in parse_qsl(parts.query, keep_blank_values=True) if key != "v"]
+              query.append(("v", version))
+              return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query), parts.fragment))
 
-          for pattern in patterns:
-              def add_version(match):
-                  url = match.group(1)
-                  if "v=" in url:
-                      return url
-                  separator = "&" if "?" in url else "?"
-                  return url + separator + "v=" + version
-              text = re.sub(pattern, add_version, text)
-
-          path.write_text(text, encoding="utf-8")
+          updated = pattern.sub(add_version, text)
+          path.write_text(updated, encoding="utf-8")
           print(f"Dashboard cache version: {version}")
           PY
 
