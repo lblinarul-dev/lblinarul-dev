@@ -89,10 +89,30 @@ I review other people's GitHub projects and contribute fixes, mostly working fro
 <!-- EXTERNAL-CONTRIBUTIONS:START -->
 | Repo | Type | Description | Link |
 |---|---|---|---|
-| lblinarul-dev/react-debugger | Project | I Fixed a Production-Style React Performance Problem | [Repo](https://github.com/lblinarul-dev/react-debugger) |
+| _(no external contributions found yet)_ | | | |
 <!-- EXTERNAL-CONTRIBUTIONS:END -->
 
-> This table is updated automatically from real public GitHub projects and contribution activity.
+> This table is updated automatically from real public GitHub contribution activity and contains work in repositories I do not own.
+
+---
+
+## 📁 My Repositories
+
+<!-- OWN-PROJECTS:START -->
+<!-- auto-populated by .github/workflows/own-projects.yml -->
+<!-- OWN-PROJECTS:END -->
+
+### Selected Work — `react-debugger`
+
+**Project:** [lblinarul-dev/react-debugger](https://github.com/lblinarul-dev/react-debugger)
+
+**Problem** — A production-style debugging case in `backend/services.py` contained an async `upload_to_imgbb()` function that was defined inside `generate_image()` but never called. The surrounding comment claimed images were uploaded to ImgBB, while the implementation returned the temporary DALL-E URL directly. citeturn123file0
+
+**Decision** — Trace the actual execution path before changing unrelated code. The fix implemented the intended upload path: generate the image, download its bytes, call the ImgBB upload helper, return the ImgBB URL when successful, and retain the DALL-E URL as a fallback when the upload cannot be completed. citeturn124file0
+
+**Result** — Source-level verification confirmed that `_upload_to_imgbb()` exists and is called by `generate_image()`. An upload test also exercised the error path; the recorded test used an invalid/revoked API key, so live ImgBB hosting requires a valid key. citeturn124file0
+
+This project is listed here as **my own project**. It is intentionally not represented as an external contribution.
 
 ---
 
@@ -123,14 +143,6 @@ I review other people's GitHub projects and contribute fixes, mostly working fro
 `Next.js` `Django` `Redis` `GitHub Actions` `Playwright` `pytest` `Jest` `SQLAlchemy`
 
 ---
-
-
-
-
-
-
-
-
 
 <a id="-github-activity" name="-github-activity"></a>
 
