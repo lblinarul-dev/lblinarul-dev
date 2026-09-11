@@ -106,11 +106,11 @@ I review other people's GitHub projects and contribute fixes, mostly working fro
 
 **Project:** [lblinarul-dev/react-debugger](https://github.com/lblinarul-dev/react-debugger)
 
-**Problem** — A production-style debugging case in `backend/services.py` contained an async `upload_to_imgbb()` function that was defined inside `generate_image()` but never called. The surrounding comment claimed images were uploaded to ImgBB, while the implementation returned the temporary DALL-E URL directly. citeturn123file0
+**Problem** — A production-style debugging case in `backend/services.py` contained an async `upload_to_imgbb()` function that was defined inside `generate_image()` but never called. The surrounding comment claimed images were uploaded to ImgBB, while the implementation returned the temporary DALL-E URL directly.
 
-**Decision** — Trace the actual execution path before changing unrelated code. The fix implemented the intended upload path: generate the image, download its bytes, call the ImgBB upload helper, return the ImgBB URL when successful, and retain the DALL-E URL as a fallback when the upload cannot be completed. citeturn124file0
+**Decision** — Trace the actual execution path before changing unrelated code. The fix implemented the intended upload path: generate the image, download its bytes, call the ImgBB upload helper, return the ImgBB URL when successful, and retain the DALL-E URL as a fallback when the upload cannot be completed.
 
-**Result** — Source-level verification confirmed that `_upload_to_imgbb()` exists and is called by `generate_image()`. An upload test also exercised the error path; the recorded test used an invalid/revoked API key, so live ImgBB hosting requires a valid key. citeturn124file0
+**Result** — Source-level verification confirmed that `_upload_to_imgbb()` exists and is called by `generate_image()`. An upload test also exercised the error path; the recorded test used an invalid/revoked API key, so live ImgBB hosting requires a valid key.
 
 This project is listed here as **my own project**. It is intentionally not represented as an external contribution.
 
