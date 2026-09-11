@@ -5,10 +5,12 @@ on:
     paths:
       - "scripts/**"
       - ".github/workflows/test-automation.yml"
+      - ".github/workflows/own-projects.yml"
   pull_request:
     paths:
       - "scripts/**"
       - ".github/workflows/test-automation.yml"
+      - ".github/workflows/own-projects.yml"
   workflow_dispatch: {}
 
 concurrency:
@@ -38,4 +40,6 @@ jobs:
         env:
           GH_USERNAME: testuser
           GH_TOKEN: fake-token-for-tests
-        run: python3 scripts/tests/test_update_external_contributions.py
+        run: |
+          python3 scripts/tests/test_update_external_contributions.py
+          python3 scripts/tests/test_update_own_projects.py
