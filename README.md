@@ -99,7 +99,9 @@ I review other people's GitHub projects and contribute fixes, mostly working fro
 ## 📁 My Repositories
 
 <!-- OWN-PROJECTS:START -->
-<!-- auto-populated by .github/workflows/own-projects.yml -->
+| Repo | Description | Last Updated | Link |
+|---|---|---|---|
+| react-debugger | I Fixed a Production-Style React Performance Problem | 2026-09-07 | [Repo](https://github.com/lblinarul-dev/react-debugger) |
 <!-- OWN-PROJECTS:END -->
 
 ### Selected Work — `react-debugger`
