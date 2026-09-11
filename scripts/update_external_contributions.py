@@ -40,12 +40,7 @@ if TOKEN:
 def github_get(url: str, params: dict[str, Any]) -> dict[str, Any]:
     """GET a GitHub API endpoint with clear errors and a bounded timeout."""
     try:
-        response = requests.get(
-            url,
-            headers=HEADERS,
-            params=params,
-            timeout=30,
-        )
+        response = requests.get(url, headers=HEADERS, params=params, timeout=30)
         response.raise_for_status()
         data = response.json()
     except requests.RequestException as exc:
@@ -171,7 +166,6 @@ def render_table(rows: list[tuple[str, str, str, str, str]]) -> str:
 
 def ensure_dashboard_anchor(content: str) -> str:
     """Keep one stable anchor immediately before the GitHub Activity heading."""
-    # Remove older explicit anchors for this target to avoid duplicate IDs.
     anchor_variants = (
         '<a id="-github-activity"></a>',
         '<a name="-github-activity"></a>',
@@ -199,11 +193,21 @@ def update_readme(table_markdown: str) -> None:
     except OSError as exc:
         sys.exit(f"Could not read {README_PATH}: {exc}")
 
-    if content.count(START_MARKER) != 1 or content.count(END_MARKER) != 1:
-        sys.exit("README.md must contain exactly one activity marker pair")
+    start_count = content.count(START_MARKER)
+    end_count = content.count(END_MARKER)
+    if start_count != 1 or end_count != 1:
+        sys.exit(
+            f"README.md must contain exactly one activity marker pair "
+            f"({start_count} START, {end_count} END); aborting without writing."
+        )
 
-    before, remainder = content.split(START_MARKER, 1)
-    _, after = remainder.split(END_MARKER, 1)
+    start_idx = content.index(START_MARKER)
+    end_idx = content.index(END_MARKER)
+    if end_idx < start_idx:
+        sys.exit("END marker appears before START marker in README.md; aborting without writing.")
+
+    before = content[:start_idx]
+    after = content[end_idx + len(END_MARKER):]
     new_content = f"{before}{START_MARKER}\n{table_markdown}\n{END_MARKER}{after}"
     new_content = ensure_dashboard_anchor(new_content)
 
