@@ -38,8 +38,8 @@ class UpdateExternalContributionsTests(unittest.TestCase):
     def test_search_owned_repositories_filters_profile_repo_and_requires_public(self):
         payload = {
             "items": [
-                {"name": "lblinarul-dev", "owner": {"login": "lblinarul-dev"}},
-                {"name": "react-debugger", "owner": {"login": "lblinarul-dev"}},
+                {"name": "testuser", "owner": {"login": "testuser"}},
+                {"name": "react-debugger", "owner": {"login": "testuser"}},
                 {"name": "other", "owner": {"login": "other"}},
             ]
         }
