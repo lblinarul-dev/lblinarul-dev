@@ -211,6 +211,14 @@ def update_readme(table_markdown: str) -> None:
     new_content = f"{before}{START_MARKER}\n{table_markdown}\n{END_MARKER}{after}"
     new_content = ensure_dashboard_anchor(new_content)
 
+    # Safety net: a generated README must not shrink drastically. A large shrink
+    # usually indicates marker corruption or an unexpected upstream failure.
+    if len(new_content) < len(content) * 0.5:
+        sys.exit(
+            "Safety check failed: new README would be less than half the size of the original. "
+            "Aborting without writing."
+        )
+
     if new_content == content:
         print("README.md is already up to date.")
         return
