@@ -89,8 +89,8 @@ I review other people's GitHub projects and contribute fixes, mostly working fro
 <!-- EXTERNAL-CONTRIBUTIONS:START -->
 | Repo | Type | Description | Link |
 |---|---|---|---|
-| lblinarul-dev/chatgpt-hidden-features | Project | Practical ChatGPT experiments and productivity workflows inspired by 10 hidden features. | [Repo](https://github.com/lblinarul-dev/chatgpt-hidden-features) |
 | lblinarul-dev/interactiv-dashboard-readme-gemini | Project | interactiv-dashboard-readme-gemini | [Repo](https://github.com/lblinarul-dev/interactiv-dashboard-readme-gemini) |
+| lblinarul-dev/chatgpt-hidden-features | Project | Practical ChatGPT experiments and productivity workflows inspired by 10 hidden features. | [Repo](https://github.com/lblinarul-dev/chatgpt-hidden-features) |
 | lblinarul-dev/react-debugger | Project | I Fixed a Production-Style React Performance Problem | [Repo](https://github.com/lblinarul-dev/react-debugger) |
 <!-- EXTERNAL-CONTRIBUTIONS:END -->
 
@@ -158,6 +158,8 @@ This project is listed here as **my own project**. It is intentionally not repre
 
 
 
+
+
 <a id="-github-activity" name="-github-activity"></a>
 
 ## 📊 GitHub Activity
@@ -167,31 +169,31 @@ This project is listed here as **my own project**. It is intentionally not repre
 <table align="center">
   <tr>
     <td>
-      <img src="https://github-readme-stats.vercel.app/api?username=lblinarul-dev&show_icons=true&theme=tokyonight&hide_border=true&v=2026091406" alt="GitHub Stats" />
+      <img src="https://github-readme-stats.vercel.app/api?username=lblinarul-dev&show_icons=true&theme=tokyonight&hide_border=true&v=2026091506" alt="GitHub Stats" />
     </td>
     <td>
-      <img src="https://streak-stats.demolab.com/?user=lblinarul-dev&theme=tokyonight&hide_border=true&v=2026091406" alt="GitHub Streak" />
+      <img src="https://streak-stats.demolab.com/?user=lblinarul-dev&theme=tokyonight&hide_border=true&v=2026091506" alt="GitHub Streak" />
     </td>
   </tr>
 </table>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=lblinarul-dev&layout=compact&theme=tokyonight&hide_border=true&v=2026091406" alt="Top Languages" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=lblinarul-dev&layout=compact&theme=tokyonight&hide_border=true&v=2026091506" alt="Top Languages" />
 </p>
 
 ### 📈 Activity — last 90 days
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=lblinarul-dev&days=90&theme=tokyo-night&hide_border=true&bg_color=00000000&custom_title=Contribution+Activity+%28Last+90+Days%29&v=2026091406" alt="GitHub activity graph for the last 90 days" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=lblinarul-dev&days=90&theme=tokyo-night&hide_border=true&bg_color=00000000&custom_title=Contribution+Activity+%28Last+90+Days%29&v=2026091506" alt="GitHub activity graph for the last 90 days" />
 </p>
 
 ### 🐍 Contribution Activity
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake-dark.svg?v=2026091406">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake.svg?v=2026091406">
-    <img alt="GitHub contribution snake" src="https://raw.githubusercontent.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake.svg?v=2026091406">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake-dark.svg?v=2026091506">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake.svg?v=2026091506">
+    <img alt="GitHub contribution snake" src="https://raw.githubusercontent.com/lblinarul-dev/lblinarul-dev/main/assets/github-contribution-grid-snake.svg?v=2026091506">
   </picture>
 </p>
 
